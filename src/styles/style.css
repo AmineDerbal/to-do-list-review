@@ -1,6 +1,7 @@
 body {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  background-color: #e9f1f7;
 }
 
 .reload-icon,
@@ -29,6 +30,7 @@ body {
 #add-task-text {
   border: none;
   width: 90%;
+  background-color: #e7dfc6;
 }
 
 #add-task-text:focus {
@@ -56,6 +58,7 @@ body {
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  background-color: #e7dfc6;
 }
 
 .completed {
@@ -114,6 +117,7 @@ input[type='checkbox'] {
   cursor: pointer;
   border: none;
   font-size: 1.2rem;
+  background-color: #e7dfc6;
 }
 
 #clear-completed:hover {
@@ -130,6 +134,7 @@ input[type='checkbox'] {
   width: 60%;
   gap: 10px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+  background-color: #e7dfc6;
 }
 
 #todo-list-content {
