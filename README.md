@@ -103,7 +103,7 @@ this project will be built using ES6 Features and webpack
 
 > Add a link to your deployed project.
 
-- [Live Demo Link](https://aminederbal.github.io/to-do-list/)
+- [Live Demo Link](https://aminederbal.github.io/to-do-list/dist)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
