@@ -1,5 +1,3 @@
-const todoList = document.getElementById('todo-list-content');
-
 export const appendTodoElement = (task, todo) => {
   const todoList = document.getElementById('todo-list-content');
   const todoElement = document.createElement('li');
