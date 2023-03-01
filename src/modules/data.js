@@ -6,9 +6,9 @@ export const checkLocalStorage = () => {
 };
 
 export const saveToLocalStorage = (todoListData) => {
-  localStorage.setItem('todoListData', JSON.stringify(todoListData));
+  window.localStorage.setItem('todoListData', JSON.stringify(todoListData));
 };
 
-export const loadLocalStorage = () => JSON.parse(localStorage.getItem('todoListData'));
+export const loadLocalStorage = () => JSON.parse(window.localStorage.getItem('todoListData'));
 
 export default { checkLocalStorage, saveToLocalStorage, loadLocalStorage };

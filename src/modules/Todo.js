@@ -37,6 +37,8 @@ export default class Todo {
 
   addTask = (task) => {
     this.list.push(task);
+    const index = this.list.length;
+    this.list[index - 1].index = index;
     return this.list;
   };
 
