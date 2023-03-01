@@ -132,6 +132,12 @@ You can deploy this project using: github pages or any host of your choice
 - Twitter: [@twitterhandle](https://twitter.com/)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/)
 
+👤 **Ashna Ali**
+
+- GitHub: [@githubhandle](https://github.com/Ashnaali3255)
+- Twitter: [@twitterhandle](https://twitter.com/Ashna_Ali1)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/ashna-ali-342151255/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
