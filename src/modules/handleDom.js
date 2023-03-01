@@ -1,6 +1,5 @@
-const todoList = document.getElementById('todo-list-content');
-
 export const appendTodoElement = (task, todo) => {
+  const todoList = document.getElementById('todo-list-content');
   const todoElement = document.createElement('li');
   todoElement.className = 'todo-item';
   todoElement.draggable = true;
@@ -42,6 +41,7 @@ const deleteClearButton = () => {
 };
 
 export const clearTodoList = () => {
+  const todoList = document.getElementById('todo-list-content');
   todoList.innerHTML = '';
   deleteClearButton();
 };
