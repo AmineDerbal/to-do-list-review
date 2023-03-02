@@ -55,7 +55,7 @@ export default class Todo {
 
   toggleCompleted = (index) => {
     this.list[index].completed = !this.list[index].completed;
-    saveToLocalStorage(this.list);
+    return this.list;
   };
 
   filterCompleted = () => {
