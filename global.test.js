@@ -127,6 +127,37 @@ describe('List manipulation', () => {
       completed: false,
     },])
   })
+  test('Clear all completed tasks', () => {
+    const todo = new Todo ();
+    todo.list = [
+      {
+        description: 'I am Here',
+        index: 1,
+        completed: false,
+      },
+      {
+        description: 'myself is the greatest',
+        index: 2,
+        completed: true,
+      },
+      {
+        description: 'this is a test',
+        index: 3,
+        completed: false,
+      },
+    ];
+    expect (todo.filterCompleted()).toEqual([{
+      description: 'I am Here',
+      index: 1,
+      completed: false,
+    },
+    {
+      description: 'this is a test',
+      index: 3,
+      completed: false,
+    },])
+  })
+
 });
 
 describe('local storage', () => {
