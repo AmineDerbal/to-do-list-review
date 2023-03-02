@@ -4,7 +4,7 @@
 
 import Todo from './src/modules/Todo.js';
 import Task from './src/modules/Task.js';
-import { loadLocalStorage } from './src/modules/data.js';
+import { loadLocalStorage, checkLocalStorage } from './src/modules/data.js';
 
 const localStorageMock = (() => {
   let store = {};
@@ -92,8 +92,8 @@ describe('List manipulation', () => {
       },
     ]);
   });
-  test('test edit task', () =>{
-    const todo = new Todo ();
+  test('test edit task', () => {
+    const todo = new Todo();
     todo.list = [
       {
         description: 'I am Here',
@@ -111,24 +111,26 @@ describe('List manipulation', () => {
         completed: false,
       },
     ];
-    expect (todo.editTask(0, 'This is the best')).toEqual([{
-      description: 'This is the best',
-      index: 1,
-      completed: true,
-    },
-    {
-      description: 'myself is the greatest',
-      index: 2,
-      completed: false,
-    },
-    {
-      description: 'this is a test',
-      index: 3,
-      completed: false,
-    },])
-  })
+    expect(todo.editTask(0, 'This is the best')).toEqual([
+      {
+        description: 'This is the best',
+        index: 1,
+        completed: true,
+      },
+      {
+        description: 'myself is the greatest',
+        index: 2,
+        completed: false,
+      },
+      {
+        description: 'this is a test',
+        index: 3,
+        completed: false,
+      },
+    ]);
+  });
   test('Clear all completed tasks', () => {
-    const todo = new Todo ();
+    const todo = new Todo();
     todo.list = [
       {
         description: 'I am Here',
@@ -146,23 +148,68 @@ describe('List manipulation', () => {
         completed: false,
       },
     ];
-    expect (todo.filterCompleted()).toEqual([{
-      description: 'I am Here',
-      index: 1,
-      completed: false,
-    },
-    {
-      description: 'this is a test',
-      index: 3,
-      completed: false,
-    },])
-  })
-
+    expect(todo.filterCompleted()).toEqual([
+      {
+        description: 'I am Here',
+        index: 1,
+        completed: false,
+      },
+      {
+        description: 'this is a test',
+        index: 3,
+        completed: false,
+      },
+    ]);
+  });
+  test('update completed status', () => {
+    const todo = new Todo();
+    todo.list = [
+      {
+        description: 'I am Here',
+        index: 1,
+        completed: true,
+      },
+      {
+        description: 'myself is the greatest',
+        index: 2,
+        completed: false,
+      },
+      {
+        description: 'this is a test',
+        index: 3,
+        completed: false,
+      },
+    ];
+    expect(todo.toggleCompleted(1)).toEqual([
+      {
+        description: 'I am Here',
+        index: 1,
+        completed: true,
+      },
+      {
+        description: 'myself is the greatest',
+        index: 2,
+        completed: true,
+      },
+      {
+        description: 'this is a test',
+        index: 3,
+        completed: false,
+      },
+    ]);
+  });
 });
 
 describe('local storage', () => {
-  const todo = new Todo();
+  test('if local storage exist or not', () => {
+    localStorageMock.clear();
+    expect(checkLocalStorage()).toBeFalsy();
+    const todo = new Todo();
+    todo.saveList();
+    expect(checkLocalStorage()).toBeTruthy();
+  });
   test('expect the local storage saved to equal the list', () => {
+    const todo = new Todo();
     todo.list = [
       {
         description: '123',
