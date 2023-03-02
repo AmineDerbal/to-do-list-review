@@ -46,7 +46,7 @@ const body = `<h1>My Todo List</h1>
   </form>
   <ul id="todo-list-content"></ul>`;
 
-describe('add and delete task', () => {
+describe('List manipulation', () => {
   test('add 1 task to the empty list', () => {
     const todo = new Todo();
     const task = new Task('hello');
@@ -92,6 +92,41 @@ describe('add and delete task', () => {
       },
     ]);
   });
+  test('test edit task', () =>{
+    const todo = new Todo ();
+    todo.list = [
+      {
+        description: 'I am Here',
+        index: 1,
+        completed: true,
+      },
+      {
+        description: 'myself is the greatest',
+        index: 2,
+        completed: false,
+      },
+      {
+        description: 'this is a test',
+        index: 3,
+        completed: false,
+      },
+    ];
+    expect (todo.editTask(0, 'This is the best')).toEqual([{
+      description: 'This is the best',
+      index: 1,
+      completed: true,
+    },
+    {
+      description: 'myself is the greatest',
+      index: 2,
+      completed: false,
+    },
+    {
+      description: 'this is a test',
+      index: 3,
+      completed: false,
+    },])
+  })
 });
 
 describe('local storage', () => {
