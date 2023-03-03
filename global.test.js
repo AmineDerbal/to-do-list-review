@@ -225,50 +225,57 @@ describe('local storage', () => {
     todo.saveList();
     expect(loadLocalStorage()).toEqual(todo.list);
   });
+});
+describe('Html Dom manipulation', () => {
+  test('add list tasks to the dom as li elements', () => {
+    const todo = new Todo();
+    document.body.innerHTML = body;
 
-  describe('Html Dom manipulation', () => {
-    test('add list tasks to the dom as li elements', () => {
-      const todo = new Todo();
-      document.body.innerHTML = body;
+    // add 1 task and render the DOM the number of li task should be 1
+    todo.addTask(new Task('hello'));
+    todo.renderList();
+    expect(document.querySelectorAll('li').length).toBe(1);
 
-      // add 1 task and render the DOM the number of li task should be 1
-      todo.addTask(new Task('hello'));
-      todo.renderList();
-      expect(document.querySelectorAll('li').length).toBe(1);
+    // add another task and render the DOM the number of li task should be 1
+    todo.addTask(new Task('123'));
+    todo.renderList();
+    expect(document.querySelectorAll('li').length).toBe(2);
+  });
 
-      // add another task and render the DOM the number of li task should be 1
-      todo.addTask(new Task('123'));
-      todo.renderList();
-      expect(document.querySelectorAll('li').length).toBe(2);
-    });
-
-    test('removing task from the dom element', () => {
-      document.body.innerHTML = body;
-      const todo = new Todo();
-      todo.list = [
-        {
-          description: 'I am Here',
-          index: 1,
-          completed: true,
-        },
-        {
-          description: 'myself is the greatest',
-          index: 2,
-          completed: false,
-        },
-        {
-          description: 'this is a test',
-          index: 3,
-          completed: false,
-        },
-      ];
-      // render the DOM expect number of li to be 3
-      todo.renderList();
-      expect(document.querySelectorAll('li').length).toBe(3);
-      // remove 1 task render the Dom and expect the number of li to be 2
-      todo.removeTask(0);
-      todo.renderList();
-      expect(document.querySelectorAll('li').length).toBe(2);
-    });
+  test('removing task from the dom element', () => {
+    document.body.innerHTML = body;
+    const todo = new Todo();
+    todo.list = [
+      {
+        description: 'I am Here',
+        index: 1,
+        completed: true,
+      },
+      {
+        description: 'myself is the greatest',
+        index: 2,
+        completed: false,
+      },
+      {
+        description: 'this is a test',
+        index: 3,
+        completed: false,
+      },
+    ];
+    // render the DOM expect number of li to be 3
+    todo.renderList();
+    expect(document.querySelectorAll('li').length).toBe(3);
+    // remove 1 task render the Dom and expect the number of li to be 2
+    todo.removeTask(0);
+    todo.renderList();
+    expect(document.querySelectorAll('li').length).toBe(2);
+  });
+  test('checkbox click', () => {
+    const todo = new Todo();
+    document.body.innerHTML = body;
+    todo.addTask(new Task('Hello'));
+    todo.renderList();
+    document.querySelector('.checkbox[data-index="1"]').dispatchEvent(new Event('change'));
+    expect(todo.list[0].index).toBeTruthy();
   });
 });
