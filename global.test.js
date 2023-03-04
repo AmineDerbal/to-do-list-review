@@ -5,7 +5,6 @@
 import Todo from './src/modules/Todo.js';
 import Task from './src/modules/Task.js';
 import { loadLocalStorage, checkLocalStorage } from './src/modules/data.js';
-import { clearTodoList } from './src/modules/handleDom';
 
 jest.useFakeTimers();
 jest.spyOn(global, 'setTimeout');
@@ -306,5 +305,31 @@ describe('Html Dom manipulation', () => {
     jest.advanceTimersByTime(1000);
     expect(removeIcon.classList.contains('icon-hidden')).toBeTruthy();
     expect(editIcon.classList.contains('icon-hidden')).toBeFalsy();
+  });
+  test('Dom input event for edit tasks', () => {
+    document.body.innerHTML = body;
+    const todo = new Todo();
+    todo.list = [
+      {
+        description: 'I am Here',
+        index: 1,
+        completed: true,
+      },
+      {
+        description: 'myself is the greatest',
+        index: 2,
+        completed: false,
+      },
+      {
+        description: 'this is a test',
+        index: 3,
+        completed: false,
+      },
+    ];
+    todo.renderList();
+    const myTask = document.querySelector('.todo-description[data-index="2"]');
+    myTask.value = 'this is a new input';
+    myTask.dispatchEvent(new Event('input'));
+    expect(loadLocalStorage()[1].description).toEqual(myTask.value);
   });
 });
