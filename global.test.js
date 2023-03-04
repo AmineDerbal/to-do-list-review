@@ -332,4 +332,29 @@ describe('Html Dom manipulation', () => {
     myTask.dispatchEvent(new Event('input'));
     expect(loadLocalStorage()[1].description).toEqual(myTask.value);
   });
+  test('DOM clear all completed tasks on button click', () => {
+    document.body.innerHTML = body;
+    const todo = new Todo();
+    todo.list = [
+      {
+        description: 'I am Here',
+        index: 1,
+        completed: true,
+      },
+      {
+        description: 'myself is the greatest',
+        index: 2,
+        completed: true,
+      },
+      {
+        description: 'this is a test',
+        index: 3,
+        completed: false,
+      },
+    ];
+    todo.renderList();
+    document.querySelector('#clear-completed').dispatchEvent(new Event('click'));
+    todo.renderList();
+    expect(document.querySelectorAll('li').length).toBe(1);
+  });
 });
