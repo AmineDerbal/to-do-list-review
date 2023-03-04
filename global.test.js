@@ -5,6 +5,7 @@
 import Todo from './src/modules/Todo.js';
 import Task from './src/modules/Task.js';
 import { loadLocalStorage, checkLocalStorage } from './src/modules/data.js';
+import { clearTodoList } from './src/modules/handleDom';
 
 jest.useFakeTimers();
 jest.spyOn(global, 'setTimeout');
@@ -269,7 +270,7 @@ describe('Html Dom manipulation', () => {
     todo.renderList();
     expect(document.querySelectorAll('li').length).toBe(3);
     // remove 1 task render the Dom and expect the number of li to be 2
-    todo.removeTask(0);
+    document.querySelector('.remove-icon[data-index="1"]').dispatchEvent(new Event('click'));
     todo.renderList();
     expect(document.querySelectorAll('li').length).toBe(2);
   });
