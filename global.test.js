@@ -6,6 +6,9 @@ import Todo from './src/modules/Todo.js';
 import Task from './src/modules/Task.js';
 import { loadLocalStorage, checkLocalStorage } from './src/modules/data.js';
 
+jest.useFakeTimers();
+jest.spyOn(global, 'setTimeout');
+
 const localStorageMock = (() => {
   let store = {};
 
@@ -277,5 +280,30 @@ describe('Html Dom manipulation', () => {
     todo.renderList();
     document.querySelector('.checkbox[data-index="1"]').dispatchEvent(new Event('change'));
     expect(todo.list[0].index).toBeTruthy();
+  });
+  test('edit event focusin and focusout', async () => {
+    const todo = new Todo();
+    document.body.innerHTML = body;
+    todo.addTask(new Task('Hello'));
+    todo.renderList();
+    const list = document.querySelector('.todo-item[data-index="1"]');
+    const removeIcon = document.querySelector('.remove-icon[data-index="1"]');
+    const editIcon = document.querySelector('.edit-icon[data-index="1"]');
+    // triggere the focusin event
+    document.querySelector('.todo-description[data-index="1"]').dispatchEvent(new Event('focusin'));
+    expect(list.className).toBe('todo-item editing');
+    jest.advanceTimersByTime(1000);
+    expect(removeIcon.classList.contains('icon-hidden')).toBeFalsy();
+    expect(editIcon.classList.contains('icon-hidden')).toBeTruthy();
+
+    // triggere the focusout event
+    document
+      .querySelector('.todo-description[data-index="1"]')
+      .dispatchEvent(new Event('focusout'));
+
+    expect(list.className).toBe('todo-item');
+    jest.advanceTimersByTime(1000);
+    expect(removeIcon.classList.contains('icon-hidden')).toBeTruthy();
+    expect(editIcon.classList.contains('icon-hidden')).toBeFalsy();
   });
 });
