@@ -7,13 +7,15 @@ const swapItems = (fromIndex, toIndex, todo) => {
   todo.renderList();
 };
 
+const getDragStartIndex = (event) => +event.target.closest('li').getAttribute('data-index');
+
 export const dragInteraction = (todo) => {
   let dragStartIndex;
   const draggables = document.querySelectorAll('.todo-item');
   const dragListItems = document.querySelectorAll('#todo-list-content li');
   draggables.forEach((draggable) => {
     draggable.addEventListener('dragstart', (e) => {
-      dragStartIndex = +e.target.closest('li').getAttribute('data-index');
+      dragStartIndex = getDragStartIndex(e);
     });
   });
   dragListItems.forEach((item) => {
@@ -34,4 +36,4 @@ export const dragInteraction = (todo) => {
   });
 };
 
-export default dragInteraction;
+export default { dragInteraction, getDragStartIndex };
