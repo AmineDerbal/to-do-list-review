@@ -5,6 +5,7 @@
 import Todo from './src/modules/Todo.js';
 import Task from './src/modules/Task.js';
 import { loadLocalStorage, checkLocalStorage } from './src/modules/data.js';
+import { swapItems } from './src/modules/dropDrag.js';
 
 jest.useFakeTimers();
 jest.spyOn(global, 'setTimeout');
@@ -191,6 +192,46 @@ describe('List manipulation', () => {
       },
       {
         description: 'myself is the greatest',
+        index: 2,
+        completed: true,
+      },
+      {
+        description: 'this is a test',
+        index: 3,
+        completed: false,
+      },
+    ]);
+  });
+
+  test('swap items', () => {
+    const todo = new Todo();
+    document.body.innerHTML = body;
+    todo.list = [
+      {
+        description: 'I am Here',
+        index: 1,
+        completed: true,
+      },
+      {
+        description: 'myself is the greatest',
+        index: 2,
+        completed: false,
+      },
+      {
+        description: 'this is a test',
+        index: 3,
+        completed: false,
+      },
+    ];
+    swapItems(1, 2, todo);
+    expect(todo.list).toEqual([
+      {
+        description: 'myself is the greatest',
+        index: 1,
+        completed: false,
+      },
+      {
+        description: 'I am Here',
         index: 2,
         completed: true,
       },
