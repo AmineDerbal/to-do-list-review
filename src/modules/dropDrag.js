@@ -1,4 +1,4 @@
-const swapItems = (fromIndex, toIndex, todo) => {
+export const swapItems = (fromIndex, toIndex, todo) => {
   const itemOne = todo.list[fromIndex - 1].index;
   const itemTwo = todo.list[toIndex - 1].index;
   todo.list[fromIndex - 1].index = itemTwo;
@@ -36,4 +36,4 @@ export const dragInteraction = (todo) => {
   });
 };
 
-export default { dragInteraction, getDragStartIndex };
+export default { dragInteraction, getDragStartIndex, swapItems };
